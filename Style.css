@@ -1,0 +1,547 @@
+:root {
+    --color-spe: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    overflow-x: clip;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    background-color: #f4f4f4;
+    /* Couleur de fond légère */
+}
+
+header {
+    box-sizing: content-box;
+    height: 100px;
+    margin-bottom: 10px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+input {
+    width: 50px;
+    padding: 5px;
+    /* Ajouté pour améliorer l'ergonomie */
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#naviguer {
+    text-align: center;
+    margin: 20px 0;
+    /* Ajouté pour espacer les éléments */
+}
+
+#naviguer a {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #000;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+#naviguer a:hover {
+    background-color: #ddd;
+    /* Ajouté pour l'effet de survol */
+}
+
+#selectBox,
+#selectBox2 {
+    overflow-y: scroll !important;
+    max-height: 50px;
+}
+
+.navbar {
+    position: absolute;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    box-sizing: border-box;
+    height: 10vh;
+}
+
+.navbar a,
+.navbar p {
+    color: #3c3c3c;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar p:hover {
+    color: var(--color-spe);
+    ;
+    /* Ajouté pour l'effet de survol */
+}
+
+.navbar .nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-size: 2em;
+    font-weight: bold;
+    height: 50px !important;
+}
+
+.navbar .nav-links ul {
+    display: flex;
+}
+
+.navbar .nav-links ul li {
+    margin: 0 25px;
+}
+
+.navbar .menu {
+    color: #3c3c3c;
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 35px;
+}
+
+.nav-links.mobile-menu {
+    margin-left: 0;
+}
+
+h1 {
+    font-family: "Special_Font", serif;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 20px 0;
+    /* Ajouté pour espacer les éléments */
+}
+
+img:not(.logo, .pitite, .apercu) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    max-height: 500px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Ajouté pour effet d'ombre */
+}
+
+#naviguer {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+div {
+    align-items: center;
+}
+
+p {
+    text-align: center;
+    margin: 5px;
+}
+
+.pitite {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.apercu {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: auto;
+}
+
+.vu,
+.mentio {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.DivButtonsNav {
+    justify-content: center !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.DivButtonsNav a {
+    padding: 5px;
+}
+
+.ButtonsNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.mentio p,
+.vu p {
+    width: 100px;
+    flex-wrap: wrap;
+}
+
+/* Style pour le tableau */
+.table-container {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    overflow-x: auto;
+    padding: 10px;
+    /* Ajouté pour un peu d'espace intérieur */
+    background-color: #fff;
+    /* Ajouté pour contraste */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Ajouté pour effet d'ombre */
+    max-width: 90%;
+    /* Limité la largeur maximale pour un meilleur centrage */
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    /* Alignement du texte à gauche */
+}
+
+.table-container th,
+.table-container td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    min-width: 50px;
+    white-space: nowrap;
+}
+
+.table-container th {
+    background-color: #f2f2f2;
+    /* Ajouté pour distinguer les en-têtes */
+    text-transform: uppercase;
+    /* Texte en majuscules pour les en-têtes */
+    font-weight: bold;
+}
+
+.table-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Ajouté pour une alternance des lignes */
+}
+
+.table-container tr:hover {
+    background-color: #f1f1f1;
+    /* Ajouté pour l'effet de survol */
+}
+
+/* Boutons */
+button,
+#naviguer a {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid #000;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3c3c3c;
+    /* Couleur de fond améliorée */
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    /* Texte en gras pour les boutons */
+}
+
+button:hover,
+#naviguer a:hover {
+    cursor: pointer;
+    background-color: --color-spe;
+    /* Couleur de fond au survol */
+    color: #fff;
+    /* Couleur du texte au survol */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    /* Effet d'ombre au survol */
+}
+
+button:active,
+#naviguer a:active {
+    background-color: --color-spe;
+    /* Couleur de fond à l'activation */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) inset;
+    /* Effet d'ombre à l'intérieur à l'activation */
+}
+
+/* Sélecteurs */
+select,
+#selectBox,
+#selectBox2 {
+    padding: 10px;
+    padding-right: 25px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    /* Couleur du texte améliorée */
+    appearance: none;
+    /* Pour masquer la flèche par défaut dans certains navigateurs */
+    -webkit-appearance: none;
+    /* Pour masquer la flèche par défaut dans Safari et Chrome */
+    -moz-appearance: none;
+    /* Pour masquer la flèche par défaut dans Firefox */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23999" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+    /* Flèche personnalisée */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:hover,
+#selectBox:hover,
+#selectBox2:hover {
+    border-color: #888;
+    /* Couleur de bordure au survol */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    /* Effet d'ombre au survol */
+}
+
+select:focus,
+#selectBox:focus,
+#selectBox2:focus {
+    border-color: #007BFF;
+    /* Couleur de bordure à la mise au point */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Effet d'ombre à la mise au point */
+    outline: none;
+    /* Supprimer le contour par défaut */
+}
+
+table img {
+    max-width: 10vw !important;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Chapter Perso";
+    height: 75vh;
+}
+
+.Chapter {
+    grid-area: Chapter;
+}
+
+.New {
+    grid-area: New;
+}
+
+.Perso {
+    grid-area: Perso;
+}
+
+.Discord {
+    grid-area: Discord;
+}
+
+.Chapter,
+.New,
+.Perso,
+.Discord {
+    max-height: 100%;
+}
+
+#Chapter_Data,
+#New_Data,
+#Perso_Data,
+#Discord_Data {
+    box-sizing: border-box;
+    /* Assure que le padding n'augmente pas la taille des éléments */
+    overflow-y: auto;
+    max-height: 50vh;
+}
+
+.Chapter h1,
+.New h1,
+.Perso h1,
+.Discord h1 {
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.chapter-line {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.chapter-number {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.chapter-title {
+    font-size: 1em;
+    flex-grow: 1;
+}
+
+.cubes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.cubes .chapter-line {
+    display: block;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.cubes .chapter-number {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.cubes .chapter-number img {
+    width: 100% !important;
+    max-width: 100% !important;
+    /* Pour que l'image occupe toute la largeur du conteneur */
+    height: auto !important;
+    max-height: 100% !important;
+    /* Pour que la hauteur s'ajuste automatiquement en proportion de la largeur */
+    display: block;
+}
+
+.cubes .chapter-title {
+    font-size: 0.8em;
+}
+
+#Chapter_Title,
+#New_Title,
+#Perso_Title,
+#Discord_Title {
+    display: flex;
+    align-items: center;
+}
+
+.Chapter button,
+.Discord button,
+.New button,
+.Perso button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.Chapter button i,
+.Discord button i,
+.New button i,
+.Perso button i {
+    font-size: 1.5em;
+    /* Ajustez la taille de l'icône selon vos besoins */
+    color: #000;
+    /* Couleur de l'icône */
+}
+
+.Chapter button:focus,
+.Discord button:focus,
+.New button:focus,
+.Perso button:focus {
+    outline: none;
+    /* Enlève le contour du bouton lorsqu'il est focalisé */
+}
+
+#Chapter_Data {
+    display: grid;
+    /* Masque initialement les données */
+}
+
+.show-data {
+    display: none !important;
+    /* Affiche les données lorsque la classe .show-data est présente */
+}
+
+@media screen and (max-width: 1200px) {
+    .navbar {
+        padding: 0;
+        flex-direction: column;
+        /* Changement pour meilleure disposition mobile */
+        align-items: flex-start;
+    }
+
+    .navbar .logo {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+    }
+
+    .navbar .menu {
+        display: block;
+        position: absolute;
+        top: 50px;
+        right: 30px;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100px;
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 100%;
+        transition: all 0.5s ease;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+    }
+
+    .nav-links ul li {
+        margin: 25px 0;
+        font-size: 1.2em;
+    }
+
+    .navbar p,
+    .navbar a {
+        color: black;
+    }
+
+    .container {
+        display: block;
+    }
+}
