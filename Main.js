@@ -39,41 +39,75 @@ async function TraiterSheetDatas(DATA, TYPE) {
     } else {
         try {
             var Temp = 0;
-            var Datacolumns = DATA.table.cols.map(Element => Element.label);
+            Datacolumns = DATA.table.cols.map(Element => Element.label);
             if (Datacolumns[0] == "") {
                 Datacolumns = DATA.table.rows[0].c.map(Element => Element.v);
                 Temp++;
             }
-            var NewData = [];
-            // Supposons que DATA.table.rows soit un tableau de lignes et chaque ligne a un tableau d'objets "c"
-            // Nous traitons chaque ligne et chaque colonne indépendamment de la première colonne
-
-            for (let i = 0; i < DATA.table.rows.length; i++) {
-                let RowKey = i;  // Utilisation de l'indice de ligne comme clé
-                if (NewData[RowKey] === undefined) {
-                    NewData[RowKey] = {};
-                }
-
-                var NumCol = 0;
-
-                NewData[DATA.table.rows[i].c[NumCol].v] = {};
-                console.log(NewData[RowKey], NewData[DATA.table.rows[i].c[NumCol].v], Datacolumns, DATA.table.rows[i]);
-                for (let j = NumCol + 1; j < Datacolumns.length; j++) {
-                    if (DATA.table.rows[i].c[j] !== null && DATA.table.rows[i].c[j]['v'] !== null) {
-                        TempData = StrToListSpe(DATA.table.rows[i].c[j].v);
-                        for (let k = 0; k < TempData.length; k++) {
-                            if (NewData[DATA.table.rows[i].c[NumCol].v][Datacolumns[j]] === undefined) {
-                                NewData[DATA.table.rows[i].c[NumCol].v][Datacolumns[j]] = StrToList(TempData[k]);
-                            } else {
-                                NewData[DATA.table.rows[i].c[NumCol].v][Datacolumns[j]].push(StrToList(TempData[k])[0]);
+            let NewData = {};
+            let WhereExist = 0;
+            for (let i = Temp; i < DATA.table.rows.length; i++) {
+                // console.log(DATA.table.rows[i].c[0].v, DATA.table.rows[i].c[1].v);
+                if (NewData[DATA.table.rows[i].c[WhereExist].v] !== undefined) {
+                    for (let j = WhereExist + 1; j < Datacolumns.length; j++) {
+                        // console.log(DATA.table.rows[i].c[j], DATA.table.rows[i].c[j]['v']);
+                        if (DATA.table.rows[i].c[j] !== null && DATA.table.rows[i].c[j]['v'] !== null) {
+                            TempData = StrToListSpe(DATA.table.rows[i].c[j].v);
+                            // console.log("TempData:", TempData);
+                            for (let k = 0; k < TempData.length; k++) {
+                                if (NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] === null) {
+                                    NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] = StrToList(TempData[k]);
+                                } else if (TempData[k][0] === "+") {
+                                    NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]].push(TempData[k].slice(1).split(","));
+                                } else if (TempData[k].includes("=>")) {
+                                    test = TempData[k].split("=>").map(item => item.split(","));
+                                    for (let k = 0; k < NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]].length; k++) {
+                                        const array1 = NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]][k];
+                                        const array2 = test[0];
+                                        if (Array.isArray(array1) && Array.isArray(array2) && array1.length === array2.length && array1.every((value, index) => value === array2[index])) {
+                                            NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]][k] = test[1];
+                                        } else if (array1 === array2[0]) {
+                                            NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]][k] = test[1][0];
+                                        }
+                                    }
+                                } else {
+                                    NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] = StrToList(TempData[k]);
+                                }
                             }
                         }
-                    } else {
-                        NewData[DATA.table.rows[i].c[NumCol].v][Datacolumns[j]] = null;
+                    }
+                } else {
+                    NewData[DATA.table.rows[i].c[WhereExist].v] = {};
+                    for (let j = WhereExist + 1; j < Datacolumns.length; j++) {
+                        if (DATA.table.rows[i].c[j] !== null && DATA.table.rows[i].c[j]['v'] !== null) {
+                            TempData = StrToListSpe(DATA.table.rows[i].c[j].v);
+                            for (let k = 0; k < TempData.length; k++) {
+                                if (NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] === undefined) {
+                                    if (TempData[k].includes("=>")) {
+                                        test = TempData[k].split("=>").map(item => item.split(","));
+                                        NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] = [test];
+                                    } else if (TempData[k][0] === "+") {
+                                        NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] = [TempData[k].slice(1).split(",")];
+                                    } else {
+                                        NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] = StrToList(TempData[k]);
+                                    }
+                                } else {
+                                    if (TempData[k].includes("=>")) {
+                                        test = TempData[k].split("=>").map(item => item.split(","));
+                                        NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]].push(test);
+                                    } else if (TempData[k][0] === "+") {
+                                        NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]].push(TempData[k].slice(1).split(","));
+                                    } else {
+                                        NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]].push(StrToList(TempData[k])[0]);
+                                    }
+                                }
+                            }
+                        } else {
+                            NewData[DATA.table.rows[i].c[WhereExist].v][Datacolumns[j]] = null;
+                        }
                     }
                 }
             }
-
             return [NewData, Datacolumns];
         } catch (error) { throw error; }
     }
@@ -95,9 +129,9 @@ function StrToList(STR) {
 // SPLIT PAR "\" SI IL Y'EN A UNE
 function StrToListSpe(STR) {
     if (typeof STR === 'string') {
-        if (STR.includes("\\")) {
+        if (STR.includes("|")) {
             //console.log(STR.split("\\"));
-            return STR.split("\\");
+            return STR.split("|");
         } else {
             return [STR];
         }
@@ -420,11 +454,8 @@ async function General() {
                             if (Types[Types.length - 1] === "Duree" || Types[Types.length - 1] !== "Duree") { TempList += " (" + Element[1] + ")"; }
                             break;
                         case "Duree":
-                            break;
                         case "Notes":
-                            break;
                         case "Date":
-                            break;
                         case "Infom":
                             break;
                         default:
@@ -470,7 +501,8 @@ async function General() {
 
         var Link = {};
         var Linked = {};
-        dicoReturn["Link"][0].forEach(Element => {
+        Object.keys(dicoReturn["Link"][0]).forEach(Element => {
+            Element = dicoReturn["Link"][0][Element]
             Link[Element["Catégorie"]] = Element["ShortName"];
             if (Linked[Element["Catégorie"]] !== undefined) {
                 Linked[Element["Catégorie"]]["Link"].push({
@@ -514,7 +546,7 @@ async function General() {
             // document.getElementById("Chapter_Title").innerHTML = `TOUS LES CHAPITRES<button id="toggleViewButton"><i class="fi fi-rr-apps-sort"></i></button>`;
             document.getElementById("Chapter_Data").innerHTML = Text;
             Text = "";
-            for (let i = 0; i <= PersoDatas.length; i++) {
+            for (let i = 0; i <= Object.keys(PersoDatas).length; i++) {
                 if (PersoDatas[i] !== undefined) {
                     if (PersoDatas[i]["Images"] !== null) {
                         Text += `<a href="index.html?char=${i}"><div class="chapter-line"><div class="chapter-number"><img class="pitite" src="${PersoDatas[i]["Images"][0][0]}"></div><div class="chapter-title">${PersoDatas[i]["Nom"]}</div></div></a>`;
