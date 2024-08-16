@@ -155,7 +155,7 @@ p {
 
 .pitite {
     max-width: 50px;
-    max-height: 50px;
+    /* max-height: 50px; */
     border-radius: 25px;
     display: block;
     margin-left: auto;
@@ -414,7 +414,7 @@ table img {
 
 .cubes-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
 }
 
@@ -434,9 +434,7 @@ table img {
     width: 100% !important;
     max-width: 100% !important;
     /* Pour que l'image occupe toute la largeur du conteneur */
-    height: auto !important;
-    max-height: 100% !important;
-    /* Pour que la hauteur s'ajuste automatiquement en proportion de la largeur */
+    aspect-ratio: 1 / 1;
     display: block;
 }
 
