@@ -541,6 +541,7 @@ async function GeneralModif() {
     var Liste = [];
     Object.keys(Datas_Range).forEach(element => {
         if (!(["Main", "id", "Link"].includes(element))) {
+            console.log(Dico_Return_Spe, element)
             Liste.push(Dico_Return_Spe[element].concat([element]));
         }
     })

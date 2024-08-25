@@ -489,20 +489,27 @@ async function General() {
             }
         }
     }
+
     Datas = await DatasRange();
     console.log("Datas:", Datas);
-
-    try {
+    var dicoReturn = await DatasVictory(false, Datas);
+    console.log("dicoReturn:", dicoReturn);
+    while (dicoReturn["Perso"] === undefined || dicoReturn["Chapter"] === undefined) {
         var dicoReturn = await DatasVictory(false, Datas);
         console.log("dicoReturn:", dicoReturn);
-        var MainDatas = dicoReturn["Main"];
-        var [PersoDatas, PersoDatasColumns] = dicoReturn["Perso"];
-        var [ChapDatas, ChapDatasColumns] = dicoReturn["Chapter"];
+    }
+    var MainDatas = dicoReturn["Main"];
+    console.log(dicoReturn["Perso"]);
+    console.log(dicoReturn["Chapter"]);
+    var [PersoDatas, PersoDatasColumns] = dicoReturn["Perso"];
+    var [ChapDatas, ChapDatasColumns] = dicoReturn["Chapter"];
+
+    try {
 
         var Link = {};
         var Linked = {};
         Object.keys(dicoReturn["Link"][0]).forEach(Element => {
-            Element = dicoReturn["Link"][0][Element]
+            Element = dicoReturn["Link"][0][Element];
             Link[Element["Catégorie"]] = Element["ShortName"];
             if (Linked[Element["Catégorie"]] !== undefined) {
                 Linked[Element["Catégorie"]]["Link"].push({
@@ -510,7 +517,7 @@ async function General() {
                     NomLien: Element["NomLien"],
                     Duree: Element["Duree"],
                     Colonne: Element["Colonne"]
-                })
+                });
             } else {
                 Linked[Element["Catégorie"]] = {
                     ShortName: Element["ShortName"],
@@ -520,7 +527,7 @@ async function General() {
                         Duree: Element["Duree"],
                         Colonne: Element["Colonne"]
                     }]
-                }
+                };
             }
         });
         // console.log(Linked)
