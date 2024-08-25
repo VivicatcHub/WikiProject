@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../Style.css" />
+    <link rel="stylesheet" href="SpecialStyle.css" />
+    <link rel="shortcut icon" type="image/png" href="Logo.png" />
+    <script src="https://kit.fontawesome.com/85ca233acb.js" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1732017259884755">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.4.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
+    <title>WIKIPROJECT - Genshin Impact</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html"><img src="https://logo-marque.com/wp-content/uploads/2021/09/One-Piece-Logo.png"
+                    alt="logo" class="logo"></a>
+            <div class="nav-links">
+                <ul>
+                    <li>
+                        <p id="modifierWhere"><i class="fa-solid fa-thumbtack"></i></p>
+                    </li>
+                    <li>
+                        <p href="#"><a href="modif.html"><i class="fa-solid fa-pen-nib"></i></a></p>
+                    </li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-bars fa-2xl menu"></i>
+        </nav>
+    </header>
+
+    <div class="container" id="container">
+        <div class="Chapter" id="Chapter">
+            <h1 id="Chapter_Title">TOUS LES CHAPITRES<button onclick="Click('Chapter_Data')"
+                    id="toggleViewButtonChapter_Data"><i class="fi fi-rr-apps"></i></button><button
+                    onclick="toggleChapterData('Chapter_Data')" id="toggleViewButtonSpeChapter_Data"><i
+                        class="fi fi-rr-angle-double-small-down"></i></button></h1>
+            <p id="Chapter_Data"></p>
+        </div>
+        <div class="Perso" id="Perso">
+            <h1 id="Perso_Title">PERSONNAGES<button onclick="Click('Perso_Data')" id="toggleViewButtonPerso_Data"><i
+                        class="fi fi-rr-apps"></i></button><button onclick="toggleChapterData('Perso_Data')"
+                    id="toggleViewButtonSpePerso_Data"><i class="fi fi-rr-angle-double-small-down"></i></button></h1>
+            <p id="Perso_Data"></p>
+        </div>
+    </div>
+    <h1 id="Character_Name"></h1>
+    <p style="padding-bottom: 50px;" id="Data"></p>
+
+    <script src="Data.js"></script>
+    <script src="../Main.js"></script>
+    <script src="../Chapitre.js"></script>
+    <script>
+        General();
+
+        function Click(CONTAINER) {
+            const chapterContainer = document.querySelector(`#${CONTAINER}`);
+            const toggleViewButton = document.getElementById(`toggleViewButton${CONTAINER}`);
+            chapterContainer.classList.toggle('cubes');
+            chapterContainer.classList.toggle('cubes-container');
+            toggleViewButton.innerHTML = chapterContainer.classList.contains('cubes') ? '<i class="fi fi-rr-apps-sort"></i>' : '<i class="fi fi-rr-apps"></i>';
+        }
+
+        function toggleChapterData(CONTAINER) {
+            const chapterData = document.getElementById(CONTAINER);
+            const toggleViewButton = document.getElementById(`toggleViewButtonSpe${CONTAINER}`);
+            chapterData.classList.toggle('show-data');
+            toggleViewButton.innerHTML = chapterData.classList.contains('show-data') ? '<i class="fi fi-rr-angle-double-small-up"></i>' : '<i class="fi fi-rr-angle-double-small-down"></i>';
+        }
+
+    </script>
+</body>
+
+</html>
